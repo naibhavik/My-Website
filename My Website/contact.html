@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="i.css">
+    <link rel="stylesheet" href="my.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
+
+<body>
+    <nav>
+        <div class="navbar">
+            <div class="logo">
+                <a href="#"></a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="skillbar.html">Skills</a></li>
+                <li><a href="contact.html">Contact us</a></li>
+            </ul>
+            <div class="appearance">
+                <div class="light-dark">
+                    <i class="btn fas fa-moon" data-color="#e4e6eb #e4e6eb #24292D #24292D #242526"></i>
+                </div>
+                <div class="color-icon">
+                    <div class="icons">
+                        <i class="fas fa-palette"></i>
+                        <i class="fas fa-sort-down arrow"></i>
+                    </div>
+                    <div class="color-box">
+                        <h3>Color Switcher</h3>
+                        <div class="color-switchers">
+                            <button class="btn blue active" data-color="#fff #24292d #4070f4 #0b3cc1 #F0F8FF"></button>
+                            <button class="btn orange" data-color="#fff #242526 #F79F1F #DD8808 #fef5e6"></button>
+                            <button class="btn purple" data-color="#fff #242526 #8e44ad #783993 #eadaf1"></button>
+                            <button class="btn green" data-color="#fff #242526 #3A9943 #2A6F31 #DAF1DC"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section class="home-content">
+
+        <div class="background">
+            <div class="container">
+                <div class="screen">
+                    <div class="screen-header">
+                        <div class="screen-header-left">
+                            <div class="screen-header-button close"></div>
+                            <div class="screen-header-button maximize"></div>
+                            <div class="screen-header-button minimize"></div>
+                        </div>
+                        <div class="screen-header-right">
+                            <div class="screen-header-ellipsis"></div>
+                            <div class="screen-header-ellipsis"></div>
+                            <div class="screen-header-ellipsis"></div>
+                        </div>
+                    </div>
+                    <div class="screen-body">
+                        <div class="screen-body-item left">
+                            <div class="app-title">
+                                <span>CONTACT</span>
+                                <span>US</span>
+                            </div>
+                            <div class="app-contact">CONTACT INFO : 6352360058</div>
+                        </div>
+                        <div class="screen-body-item">
+                            <div class="app-form">
+                                <div class="form">
+                                    <form action="https://formsubmit.co/e96c4fba2e183e4336d652e7ed30e406" method="POST">
+                                        <input type="text " name="Name" placeholder="Name " required>
+                                        <input type="email " name="Email" placeholder="Email" required>
+                                        <input type="phone number " name="Phone Number" placeholder="Phone Number" required>
+
+                                        <textarea name="Message " placeholder="Message" required></textarea>
+                                        <button id="btn ">Submit</button>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="social-media">
+            <a href="https://www.linkedin.com/in/nai-bhavik-6b1726213"><i class="fab fa-linkedin"></i></a>
+            <a href="https://twitter.com/NAIBHAVIK1?t=Hd3kcQ2i94X5-VsysLUr2Q&s=09"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fas fa-link"></i></a>
+        </div>
+        </div>
+    </section>
+
+
+
+
+    <script>
+        // Js code to make color box enable or disable
+        let colorIcons = document.querySelector(".color-icon"),
+            icons = document.querySelector(".color-icon .icons");
+
+        icons.addEventListener("click", () => {
+            colorIcons.classList.toggle("open");
+        })
+
+        // getting all .btn elements
+        let buttons = document.querySelectorAll(".btn");
+
+        for (var button of buttons) {
+            button.addEventListener("click", (e) => { //adding click event to each button
+                let target = e.target;
+
+                let open = document.querySelector(".open");
+                if (open) open.classList.remove("open");
+
+                document.querySelector(".active").classList.remove("active");
+                target.classList.add("active");
+
+                // js code to switch colors (also day night mode)
+                let root = document.querySelector(":root");
+                let dataColor = target.getAttribute("data-color"); //getting data-color values of clicked button
+                let color = dataColor.split(" "); //splitting each color from space and make them array
+
+                //passing particular value to a particular root variable
+                root.style.setProperty("--white", color[0]);
+                root.style.setProperty("--black", color[1]);
+                root.style.setProperty("--nav-main", color[2]);
+                root.style.setProperty("--switchers-main", color[3]);
+                root.style.setProperty("--light-bg", color[4]);
+
+                let iconName = target.className.split(" ")[2]; //getting the class name of icon
+
+                let coloText = document.querySelector(".home-content span");
+
+                if (target.classList.contains("fa-moon")) { //if icon name is moon
+                    target.classList.replace(iconName, "fa-sun") //replace it with the sun
+                    colorIcons.style.display = "none";
+                    coloText.classList.add("darkMode");
+                } else if (target.classList.contains("fa-sun")) { //if icon name is sun
+                    target.classList.replace("fa-sun", "fa-moon"); //replace it with the sun
+                    colorIcons.style.display = "block";
+                    coloText.classList.remove("darkMode");
+                    document.querySelector(".btn.blue").click();
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
